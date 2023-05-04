@@ -40,7 +40,7 @@ class Movie extends React.Component {
        <ScrollView contentContainerStyle={[!movie.locations.length && { flex: 1 }]}>
          <View style={[styles.locationsContainer, !movie.locations.length && { flex: 1, justifyContent: 'center' }]}>
            {
-             !movie.locations.length && <CenterMessage message='No locations for this movie!' />
+             !movie.locations.length && <CenterMessage message='Nenhum filme/série adicionado!' />
            }
            {
              movie.locations.map((location, index) => (
@@ -62,7 +62,7 @@ class Movie extends React.Component {
        <View style={styles.buttonContainer}>
          <TouchableOpacity onPress={this.addLocation}>
            <View style={styles.button}>
-             <Text style={styles.buttonText}>Add Location</Text>
+             <Text style={styles.buttonText}>Adicionar review</Text>
            </View>
          </TouchableOpacity>
        </View>

@@ -8,7 +8,7 @@ const MoviesNav = createStackNavigator()
 
 const MoviesNavScreen = ({movies, addLocation}) => (
    <MoviesNav.Navigator >
-     <MoviesNav.Screen name="Movies">
+     <MoviesNav.Screen name="Filmes/Séries">
        { props => <Movies {...props} movies={movies}/> }
      </MoviesNav.Screen>
      <MoviesNav.Screen name="Movie" options={({ route }) => ({ title: route.params.movie.movie })}>

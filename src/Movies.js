@@ -27,7 +27,7 @@ export default class Movies extends React.Component {
      <ScrollView  contentContainerStyle={[!movies.length && { flex: 1 }]}>
        <View style={[!movies.length && { justifyContent: 'center', flex: 1 }]}>
          {
-           !movies.length && <CenterMessage message='No saved movies!' />
+           !movies.length && <CenterMessage message='Nenhum filme/série adicionado ainda!' />
          }
          {
            movies.map((item, index) => (
