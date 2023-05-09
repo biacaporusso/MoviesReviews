@@ -11,13 +11,11 @@ import {
 
 import CenterMessage from './CenterMessage'
 import { colors } from './theme'
-import StarRating from 'react-native-star-rating';
 
 class Movie extends React.Component {
   state = {
    name: '',
-   info: '',
-   rating: 0
+   info: ''
  }
  onChangeText = (key, value) => {
    this.setState({
@@ -29,29 +27,34 @@ class Movie extends React.Component {
    const { movie } = this.props.route.params
    const film = {
      name: this.state.name,
-     info: this.state.info
+     info: this.state.info,
    }
    this.props.addFilm(film, movie)
-   this.setState({ name: '', info: '' })
+   this.setState({ name: '', info: ''})
  }
  render() {
   const { movie } = this.props.route.params
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={[!movie.films.length && { flex: 1 }]}>
-        {/* ... */}
+        <View style={[styles.locationsContainer, !movie.films.length && { flex: 1, justifyContent: 'center' }]}>
+            {
+              !movie.films.length && <CenterMessage message='Nenhuma review adicionada!' />
+            }
+            {
+              movie.films.map((film, index) => (
+                <View key={index} style={styles.locationContainer}>
+                  <Text style={styles.locationName}>{film.name}</Text>
+                  <Text style={styles.locationInfo}>{film.info}</Text>
+                  
+                </View>
+              ))
+            }
+        </View>
       </ScrollView>
-      <StarRating
-        disabled={false}
-        maxStars={5}
-        rating={this.state.rating}
-        selectedStar={(rating) => this.setState({ rating })}
-        starSize={30}
-        starStyle={{ color: 'white' }}
-      />
       <TextInput
         onChangeText={val => this.onChangeText('info', val)}
-        placeholder='Resenha sobre o filme/série assistido'
+        placeholder='Escreva aqui sua Review'
         value={this.state.info}
         style={[styles.input]}
         placeholderTextColor='white'

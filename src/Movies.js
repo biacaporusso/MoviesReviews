@@ -9,15 +9,26 @@ import {
 
 
 import CenterMessage from './CenterMessage'
-
+import StarRating from 'react-native-star-rating';
 
 import { colors } from './theme'
 
 
 export default class Movies extends React.Component {
+
   navigate = (item) => {
    this.props.navigation.navigate('Movie', { movie: item })
  }
+
+  state = {
+    rating: 0
+  }
+
+  onStarRatingPress(rating) {
+    this.setState({
+      rating: rating
+    });
+  }
 
 
  render() {
@@ -35,6 +46,15 @@ export default class Movies extends React.Component {
                <View style={styles.movieContainer}>
                  <Text style={styles.movie}>{item.movie}</Text>
                  <Text style={styles.extraInfo}>{item.extraInfo}</Text>
+                 <StarRating
+                  disabled={false}
+                  maxStars={5}
+                  rating={this.state.rating}
+                  selectedStar={(rating) => this.onStarRatingPress(rating) }
+                  starSize={25}
+                  starStyle={{ color: 'gold' }}
+                  fullStarColor={{ color: 'gold'}}
+                />
                </View>
              </TouchableWithoutFeedback>
            ))
@@ -50,7 +70,7 @@ const styles = StyleSheet.create({
  movieContainer: {
    padding: 10,
    borderBottomWidth: 2,
-   borderBottomColor: 'coral'
+   borderBottomColor: 'lightgrey'
  },
  movie: {
    fontSize: 20,

@@ -11,7 +11,6 @@ import {
 
 import * as Random from 'expo-random'
 import { colors } from './theme'
-import AlertAPI from './AlertAPI'
 import { Alert } from 'react-native'
 import { TouchableHighlight } from 'react-native-gesture-handler'
 
@@ -19,20 +18,18 @@ import { TouchableHighlight } from 'react-native-gesture-handler'
 class AddMovie extends React.Component {
  state = {
    movie: '',
-   extraInfo: '',
-   rating: 0
+   extraInfo: ''
  }
  onChangeText = (key, value) => {
    this.setState({ [key]: value })
  }
  submit = () => {
    if (this.state.movie === '' || this.state.extraInfo === '') 
-    alert('please complete form')
+    alert('Favor preencher todas as colunas')
   else {
    const movie = {
      movie: this.state.movie,
      extraInfo: this.state.extraInfo,
-     rating: this.state.rating,
      id: String(Random.getRandomBytes(8)),
      films: []
    }
