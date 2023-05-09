@@ -23,12 +23,12 @@ export default class App extends Component{
    this.setState({ movies })
    console.log('estado do app.js: ', this.state)
  }
-  addLocation = (location, movie) => {
+  addFilm = (film, movie) => {
    const index = this.state.movies.findIndex(item => {
      return item.id === movie.id
    })
    const chosenMovie = this.state.movies[index]
-   chosenMovie.locations.push(location)
+   chosenMovie.films.push(film)
    const movies = [
      ...this.state.movies.slice(0, index),
      chosenMovie,
@@ -41,16 +41,17 @@ export default class App extends Component{
   render(){
    return(
      <NavigationContainer>
-       <Tab.Navigator>
+
+        <Tab.Navigator>
          <Tab.Screen name='Filmes/Séries assistidos'>
            {props => <MoviesNavScreen {...props}
            movies={this.state.movies}
-           addLocation={this.addLocation}/>}
+           addFilm={this.addFilm}/>}
          </Tab.Screen>
+
          <Tab.Screen name='Adicionar novo assistido'>
            {() => <AddMovie addMovie={this.addMovie}/>}
-       </Tab.Screen>
-
+         </Tab.Screen>
 
        </Tab.Navigator>
      </NavigationContainer> 

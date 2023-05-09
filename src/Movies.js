@@ -34,7 +34,7 @@ export default class Movies extends React.Component {
              <TouchableWithoutFeedback onPress={() => this.navigate(item)} key={index} >
                <View style={styles.movieContainer}>
                  <Text style={styles.movie}>{item.movie}</Text>
-                 <Text style={styles.country}>{item.country}</Text>
+                 <Text style={styles.extraInfo}>{item.extraInfo}</Text>
                </View>
              </TouchableWithoutFeedback>
            ))
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
  movie: {
    fontSize: 20,
  },
- country: {
-   color: 'rgba(0, 0, 0, .5)'
+ extraInfo: {
+   color: 'grey'
  }, 
 })

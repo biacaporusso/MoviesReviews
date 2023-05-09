@@ -11,64 +11,61 @@ import {
 
 import CenterMessage from './CenterMessage'
 import { colors } from './theme'
-
+import StarRating from 'react-native-star-rating';
 
 class Movie extends React.Component {
   state = {
    name: '',
-   info: ''
+   info: '',
+   rating: 0
  }
  onChangeText = (key, value) => {
    this.setState({
      [key]: value
    })
  }
- addLocation = () => {
+ addFilm = () => {
    if (this.state.info === '') return
    const { movie } = this.props.route.params
-   const location = {
+   const film = {
      name: this.state.name,
      info: this.state.info
    }
-   this.props.addLocation(location, movie)
+   this.props.addFilm(film, movie)
    this.setState({ name: '', info: '' })
  }
  render() {
-   const { movie } = this.props.route.params
-   return (
-     <View style={{ flex: 1 }}>
-       <ScrollView contentContainerStyle={[!movie.locations.length && { flex: 1 }]}>
-         <View style={[styles.locationsContainer, !movie.locations.length && { flex: 1, justifyContent: 'center' }]}>
-           {
-             !movie.locations.length && <CenterMessage message='Nenhum filme/série adicionado!' />
-           }
-           {
-             movie.locations.map((location, index) => (
-               <View key={index} style={styles.locationContainer}>
-                 <Text style={styles.locationName}>{location.name}</Text>
-                 <Text style={styles.locationInfo}>{location.info}</Text>
-               </View>
-             ))
-           }
-         </View>
-       </ScrollView>
-       <TextInput
-         onChangeText={val => this.onChangeText('info', val)}
-         placeholder='Resenha sobre o filme/série assistido'
-         value={this.state.info}
-         style={[styles.input, styles.input2]}
-         placeholderTextColor='white'
-       />
-       <View style={styles.buttonContainer}>
-         <TouchableOpacity onPress={this.addLocation}>
-           <View style={styles.button}>
-             <Text style={styles.buttonText}>Adicionar review</Text>
-           </View>
-         </TouchableOpacity>
-       </View>
-     </View>
-   )
- }
+  const { movie } = this.props.route.params
+  return (
+    <View style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={[!movie.films.length && { flex: 1 }]}>
+        {/* ... */}
+      </ScrollView>
+      <StarRating
+        disabled={false}
+        maxStars={5}
+        rating={this.state.rating}
+        selectedStar={(rating) => this.setState({ rating })}
+        starSize={30}
+        starStyle={{ color: 'white' }}
+      />
+      <TextInput
+        onChangeText={val => this.onChangeText('info', val)}
+        placeholder='Resenha sobre o filme/série assistido'
+        value={this.state.info}
+        style={[styles.input]}
+        placeholderTextColor='white'
+      />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={this.addFilm}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Adicionar review</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
+}
 }
 
 
@@ -81,16 +78,13 @@ const styles = StyleSheet.create({
  },
  input: {
    height: 50,
-   backgroundColor: colors.primary,
+   backgroundColor: 'coral',
    color: 'white',
    paddingHorizontal: 8,
    position: 'absolute',
    width: '100%',
-   bottom: 104,
+   bottom: 60,
    left: 0
- },
- input2: {
-   bottom: 52
  },
  buttonContainer: {
    position: 'absolute',
@@ -100,7 +94,7 @@ const styles = StyleSheet.create({
  },
  button: {
    height: 50,
-   backgroundColor: 'coral',
+   backgroundColor: '#666',
    justifyContent: 'center',
    alignItems: 'center'
  },

@@ -11,35 +11,47 @@ import {
 
 import * as Random from 'expo-random'
 import { colors } from './theme'
+import AlertAPI from './AlertAPI'
+import { Alert } from 'react-native'
+import { TouchableHighlight } from 'react-native-gesture-handler'
 
 
 class AddMovie extends React.Component {
  state = {
    movie: '',
-   country: ''
+   extraInfo: '',
+   rating: 0
  }
  onChangeText = (key, value) => {
    this.setState({ [key]: value })
  }
  submit = () => {
-   if (this.state.movie === '' || this.state.country === '') alert('please complete form')
+   if (this.state.movie === '' || this.state.extraInfo === '') 
+    alert('please complete form')
+  else {
    const movie = {
      movie: this.state.movie,
-     country: this.state.country,
+     extraInfo: this.state.extraInfo,
+     rating: this.state.rating,
      id: String(Random.getRandomBytes(8)),
-     locations: []
+     films: []
    }
    this.props.addMovie(movie)
    this.setState({
      movie: '',
-     country: ''
+     extraInfo: ''
    })
+   Alert.alert(
+    'Sucesso',
+    'Filme adicionado com sucesso!'
+  )
+  }
  }
  render() {
    return (
      <View style={styles.container}>
        <Image source={require('./filmes.jpeg')} style={styles.image}  />
-       <Text style={styles.heading}>Filme</Text>
+       <Text style={styles.heading}>🎥 review de filmes e séries 🎥</Text>
        <TextInput
          placeholder='Filme/Série'
          onChangeText={val => this.onChangeText('movie', val)}
@@ -48,15 +60,16 @@ class AddMovie extends React.Component {
        />
        <TextInput
          placeholder='Ano de lançamento'
-         onChangeText={val => this.onChangeText('country', val)}
+         onChangeText={val => this.onChangeText('extraInfo', val)}
          style={styles.input}
-         value={this.state.country}
+         value={this.state.extraInfo}
        />
        <TouchableOpacity onPress={this.submit}>
          <View style={styles.button}>
            <Text style={styles.buttonText}>Adicionar novo</Text>
          </View>
        </TouchableOpacity>
+       
      </View>
    )
  }
@@ -69,7 +82,7 @@ const styles = StyleSheet.create({
    backgroundColor: '#666',
    justifyContent: 'center',
    alignItems: 'center',
-   margin: 10
+   margin: 70
  },
  buttonText: {
    color: 'white',
@@ -77,7 +90,7 @@ const styles = StyleSheet.create({
  },
  heading: {
    color: 'white',
-   fontSize: 40,
+   fontSize: 25,
    marginBottom: 10,
    alignSelf: 'center'
  },
@@ -93,10 +106,10 @@ const styles = StyleSheet.create({
    height: 50
  }, 
  image: {
-  width:500,
-  height: 250,
-   margin: 10,
-   borderRadius: 60,
+  width:380,
+  height: 199,
+   margin: 30,
+   borderRadius: 30,
    alignSelf: 'center'
    
  }
