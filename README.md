@@ -7,6 +7,7 @@ O objetivo da aplicação é permitir que o usuário gerencie filmes e séries q
 Pelo terminal, navegue até onde deseja criar a pasta do seu projeto e execute:
 >> npx create-expo-app Review
 
+
 Navegue para a pasta criada e execute os seguintes comandos para instalação das bibliotecas necessárias:
 >> npm install @react-navigation/native
 
@@ -21,5 +22,5 @@ Navegue para a pasta criada e execute os seguintes comandos para instalação da
 >> npx expo install expo-random
 
 ## Execução do projeto:
+Pelo terminal, execute o seguinte comando na pasta raiz do projeto:
 >> npx expo start
-
