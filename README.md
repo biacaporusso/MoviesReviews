@@ -1,6 +1,5 @@
 # MoviesReviews
-Prova de desenvolvimento de app - Review de Filmes e Séries
-Projeto desenvolvido em JavaScript, utilizando as ferramentas React Native e Expo
+Projeto desenvolvido em JavaScript, utilizando as ferramentas React Native e Expo.
 O objetivo da aplicação é permitir que o usuário gerencie filmes e séries que foram assistidos.
 
 Criando o projeto:
