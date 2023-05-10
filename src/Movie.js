@@ -37,15 +37,15 @@ class Movie extends React.Component {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={[!movie.films.length && { flex: 1 }]}>
-        <View style={[styles.locationsContainer, !movie.films.length && { flex: 1, justifyContent: 'center' }]}>
+        <View style={[styles.moviesContainer, !movie.films.length && { flex: 1, justifyContent: 'center' }]}>
             {
               !movie.films.length && <CenterMessage message='Nenhuma review adicionada!' />
             }
             {
               movie.films.map((film, index) => (
-                <View key={index} style={styles.locationContainer}>
-                  <Text style={styles.locationName}>{film.name}</Text>
-                  <Text style={styles.locationInfo}>{film.info}</Text>
+                <View key={index} style={styles.movieContainer}>
+                  <Text style={styles.movieName}>{film.name}</Text>
+                  <Text style={styles.movieInfo}>{film.info}</Text>
                   
                 </View>
               ))
@@ -57,12 +57,12 @@ class Movie extends React.Component {
         placeholder='Escreva aqui sua Review'
         value={this.state.info}
         style={[styles.input]}
-        placeholderTextColor='white'
+        placeholderTextColor='black'
       />
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={this.addFilm}>
           <View style={styles.button}>
-            <Text style={styles.buttonText}>Adicionar review</Text>
+            <Text style={styles.buttonText}>Adicionar Review</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -76,13 +76,13 @@ const styles = StyleSheet.create({
  container: {
    flex: 1
  },
- locationsContainer: {
+ moviesContainer: {
    paddingBottom: 104
  },
  input: {
    height: 50,
-   backgroundColor: 'coral',
-   color: 'white',
+   backgroundColor: 'white',
+   color: '#1C1C1C',
    paddingHorizontal: 8,
    position: 'absolute',
    width: '100%',
@@ -97,23 +97,24 @@ const styles = StyleSheet.create({
  },
  button: {
    height: 50,
-   backgroundColor: '#666',
+   backgroundColor: 'gold',
    justifyContent: 'center',
    alignItems: 'center'
  },
  buttonText: {
-   color: 'white'
+   color: '#1C1C1C',
+   fontSize: 17
  },
- locationContainer: {
+ movieContainer: {
    padding: 10,
-   borderBottomColor: 'coral',
+   borderBottomColor: 'gold',
    borderBottomWidth: 2
  },
- locationName: {
+ movieName: {
    fontSize: 20
  },
- locationInfo: {
-   color: 'rgba(0, 0, 0, .5)'
+ movieInfo: {
+   color: 'black'
  }
 })
 

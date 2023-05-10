@@ -4,7 +4,6 @@ import MoviesNavScreen from './src/MoviesNavScreen'
 import { NavigationContainer } from '@react-navigation/native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import AddMovie from './src/AddMovie'
-import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 
 
 const Tab = createMaterialBottomTabNavigator()
@@ -39,32 +38,41 @@ export default class App extends Component{
      movies
    })
  }
+
+ addRating = (movie, rating) => {
+  const index = this.state.movies.findIndex(item => {
+    return item.id === movie.id
+  })
+  const chosenMovie = this.state.movies[index]
+  chosenMovie.rating = rating
+  const movies = [
+    ...this.state.movies.slice(0, index),
+    chosenMovie,
+    ...this.state.movies.slice(index + 1)
+  ]
+  this.setState({
+    movies
+  })
+  
+ }
+
   render(){
    return(
      <NavigationContainer>
-       <KeyboardAvoidingView
-         behavior={Platform.OS === "ios" ? "padding" : "height"}
-         style={styles.container}>
-         <Tab.Navigator>
-           <Tab.Screen name='Assistidos'>
-             {props => <MoviesNavScreen {...props}
-             movies={this.state.movies}
-             addFilm={this.addFilm}/>}
-           </Tab.Screen>
-           <Tab.Screen name='Adicionar filme'>
-             {props => <AddMovie {...props}
-             addMovie={this.addMovie}/>}
-           </Tab.Screen>
-         </Tab.Navigator>
-       </KeyboardAvoidingView>
-     </NavigationContainer>
+       <Tab.Navigator>
+         <Tab.Screen name='Assistidos'>
+           {props => <MoviesNavScreen {...props}
+           movies={this.state.movies}
+           addRating={this.addRating}
+           addFilm={this.addFilm}/>}
+         </Tab.Screen>
+         <Tab.Screen name='Adicionar filme'>
+           {() => <AddMovie addMovie={this.addMovie}/>}
+       </Tab.Screen>
+
+
+       </Tab.Navigator>
+     </NavigationContainer> 
    )
  }
 }
-
-
-const styles = StyleSheet.create({
- container: {
-   flex: 1
- },
-});

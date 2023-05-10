@@ -24,12 +24,13 @@ class AddMovie extends React.Component {
    this.setState({ [key]: value })
  }
  submit = () => {
-   if (this.state.movie === '' || this.state.extraInfo === '') 
-    alert('Favor preencher todas as colunas')
+   if (this.state.movie === '') 
+    alert('Favor preencher o nome!')
   else {
    const movie = {
      movie: this.state.movie,
      extraInfo: this.state.extraInfo,
+     rating: 0,
      id: String(Random.getRandomBytes(8)),
      films: []
    }
@@ -48,18 +49,20 @@ class AddMovie extends React.Component {
    return (
      <View style={styles.container}>
        <Image source={require('./filmes.jpeg')} style={styles.image}  />
-       <Text style={styles.heading}>🎥 review de filmes e séries 🎥</Text>
+       <Text style={styles.heading}>🎥 Review de Filmes e Séries 🎥</Text>
        <TextInput
          placeholder='Filme/Série'
          onChangeText={val => this.onChangeText('movie', val)}
          style={styles.input}
          value={this.state.movie}
+         placeholderTextColor='#696969'
        />
        <TextInput
-         placeholder='Ano de lançamento'
+         placeholder='Informação Adicional (ex.: ano de lançamento, diretor etc)'
          onChangeText={val => this.onChangeText('extraInfo', val)}
          style={styles.input}
          value={this.state.extraInfo}
+         placeholderTextColor='#696969'
        />
        <TouchableOpacity onPress={this.submit}>
          <View style={styles.button}>
@@ -76,29 +79,31 @@ class AddMovie extends React.Component {
 const styles = StyleSheet.create({
  button: {
    height: 50,
-   backgroundColor: '#666',
+   backgroundColor: 'gold',
    justifyContent: 'center',
    alignItems: 'center',
    margin: 70
  },
  buttonText: {
-   color: 'white',
+   color: 'black',
    fontSize: 18
  },
  heading: {
-   color: 'white',
-   fontSize: 25,
+   color: 'gold',
+   fontSize: 23,
+   fontWeight: 'bold',
    marginBottom: 10,
    alignSelf: 'center'
  },
  container: {
-   backgroundColor: 'coral',
+   backgroundColor: '#1C1C1C',
    flex: 1,
    justifyContent: 'center'
  },
  input: {
    margin: 10,
    backgroundColor: 'white',
+   placeholder: 'green',
    paddingHorizontal: 8,
    height: 50
  }, 

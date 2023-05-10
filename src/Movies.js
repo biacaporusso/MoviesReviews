@@ -24,10 +24,10 @@ export default class Movies extends React.Component {
     rating: 0
   }
 
-  onStarRatingPress(rating) {
-    this.setState({
-      rating: rating
-    });
+  onStarRatingPress = (item, rating) => {
+    //const {movie} = this.props.route.params
+    //item.rating = rating
+    this.props.addRating(item, rating)
   }
 
 
@@ -49,8 +49,8 @@ export default class Movies extends React.Component {
                  <StarRating
                   disabled={false}
                   maxStars={5}
-                  rating={this.state.rating}
-                  selectedStar={(rating) => this.onStarRatingPress(rating) }
+                  rating={item.rating}
+                  selectedStar={(rating) => this.onStarRatingPress(item, rating) }
                   starSize={25}
                   starStyle={{ color: 'gold' }}
                   fullStarColor={{ color: 'gold'}}
